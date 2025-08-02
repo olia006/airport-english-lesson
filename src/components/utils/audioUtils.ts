@@ -1,7 +1,7 @@
 export const playSuccessSound = () => {
   try {
     // Check if AudioContext is supported
-    const AudioContextClass = window.AudioContext || (window as any).webkitAudioContext;
+    const AudioContextClass = window.AudioContext || (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext;
     if (!AudioContextClass) {
       console.log('AudioContext not supported');
       return;
@@ -42,7 +42,7 @@ export const playSuccessSound = () => {
 // Mobile-specific audio context initialization
 export const initAudioContext = () => {
   try {
-    const AudioContextClass = window.AudioContext || (window as any).webkitAudioContext;
+    const AudioContextClass = window.AudioContext || (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext;
     if (!AudioContextClass) {
       return null;
     }
@@ -63,7 +63,7 @@ export const initAudioContext = () => {
 
 // Check if audio is supported on the device
 export const isAudioSupported = () => {
-  return !!(window.AudioContext || (window as any).webkitAudioContext);
+  return !!(window.AudioContext || (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext);
 };
 
 // Check if speech synthesis is supported

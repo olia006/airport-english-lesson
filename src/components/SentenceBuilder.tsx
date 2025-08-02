@@ -164,7 +164,7 @@ export default function SentenceBuilder({ onComplete }: SentenceBuilderProps) {
 
   const playSuccessSound = () => {
     try {
-      const audioContext = new (window.AudioContext || (window as any).webkitAudioContext)();
+      const audioContext = new (window.AudioContext || (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext)();
       
       // Resume audio context if suspended
       if (audioContext.state === 'suspended') {
@@ -186,13 +186,13 @@ export default function SentenceBuilder({ onComplete }: SentenceBuilderProps) {
       
       oscillator.start(audioContext.currentTime);
       oscillator.stop(audioContext.currentTime + 0.2);
-    } catch (error) {
+    } catch {
       console.log('Success sound played');
     }
   };
 
   const playWinnerSound = () => {
-    const audioContext = new (window.AudioContext || (window as any).webkitAudioContext)();
+    const audioContext = new (window.AudioContext || (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext)();
     const oscillator = audioContext.createOscillator();
     const gainNode = audioContext.createGain();
     
